@@ -9,7 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.6.0
+
+  http: ^1.2.0
+  image_picker: ^1.0.7 
 
 dev_dependencies:
   flutter_test:
@@ -19,4 +21,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/         #สร้างพาธเก็บรูปภาาพ
+    - assets/images/
