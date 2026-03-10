@@ -17,7 +17,7 @@ try {
     $id = $_POST['id'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
-    $price = $_POST['phone'];
+    $phone = $_POST['phone'];
     $user = $_POST['username'];
     $password = $_POST['password'];
     $oldImage = $_POST['old_image'];

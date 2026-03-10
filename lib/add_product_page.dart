@@ -164,7 +164,7 @@ class _AddProductPageState extends State<AddProductPage> {
                               fit: BoxFit.cover,
                             )
                           : Image.file(
-                              File(selectedImage!.path), // ✅ Mobile
+                              File(selectedImage!.path), // ✅ Mobilegit 
                               fit: BoxFit.cover,
                             ),
                 ),

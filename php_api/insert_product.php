@@ -18,7 +18,7 @@ $imageName = "";
 if (isset($_FILES['image'])) {
 
     $targetDir = "images/";   // ✅ โฟลเดอร์เก็บรูป
-    $imageName = time() . "_" . basename($_FILES["image"]["fname"]);
+    $imageName = time() . "_" . basename($_FILES["image"]["name"]);
     $targetFile = $targetDir . $imageName;
 
     if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
