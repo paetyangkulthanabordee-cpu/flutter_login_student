@@ -19,9 +19,11 @@ class EditProductPage extends StatefulWidget {
 
 class _EditProductPageState extends State<EditProductPage> {
 
-  late TextEditingController nameController;
-  late TextEditingController priceController;
-  late TextEditingController descController;
+  late TextEditingController fnameController;
+  late TextEditingController lnameController;
+  late TextEditingController phoneController;
+  late TextEditingController usernameController;
+  late TextEditingController passwordController;
 
   XFile? selectedImage;
 
@@ -29,14 +31,18 @@ class _EditProductPageState extends State<EditProductPage> {
   void initState() {
     super.initState();
 
-    nameController =
-        TextEditingController(text: widget.product['name']);
+    fnameController =
+        TextEditingController(text: widget.product['fname']);
+    lnameController =
+        TextEditingController(text: widget.product['lname']);
 
-    priceController =
-        TextEditingController(text: widget.product['price']);
+    phoneController =
+        TextEditingController(text: widget.product['phone']);
 
-    descController =
-        TextEditingController(text: widget.product['description']);
+    usernameController =
+        TextEditingController(text: widget.product['username']);
+    passwordController =
+        TextEditingController(text: widget.product['password']);
   }
 
   ////////////////////////////////////////////////////////////
@@ -73,9 +79,11 @@ class _EditProductPageState extends State<EditProductPage> {
       ////////////////////////////////////////////////////////
 
       request.fields['id'] = widget.product['id'].toString();
-      request.fields['name'] = nameController.text;
-      request.fields['price'] = priceController.text;
-      request.fields['description'] = descController.text;
+      request.fields['fname'] = fnameController.text;
+      request.fields['lname'] = lnameController.text;
+      request.fields['phone'] = phoneController.text;
+      request.fields['username'] = usernameController.text;
+      request.fields['password'] = passwordController.text;
       request.fields['old_image'] = widget.product['image'];
 
       ////////////////////////////////////////////////////////
@@ -141,7 +149,7 @@ class _EditProductPageState extends State<EditProductPage> {
         "${baseUrl}images/${widget.product['image']}";
 
     return Scaffold(
-      appBar: AppBar(title: const Text("แก้ไขสินค้า")),
+      appBar: AppBar(title: const Text("แก้ไขนักศึกษา")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
 
@@ -183,25 +191,39 @@ class _EditProductPageState extends State<EditProductPage> {
               const SizedBox(height: 15),
 
               TextField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: "ชื่อสินค้า"),
+                controller: fnameController,
+                decoration: const InputDecoration(labelText: "ชื่อ"),
               ),
 
               const SizedBox(height: 10),
 
               TextField(
-                controller: priceController,
-                decoration: const InputDecoration(labelText: "ราคา"),
+                controller: lnameController,
+                decoration: const InputDecoration(labelText: "นามสกุล"),
               ),
 
               const SizedBox(height: 10),
 
               TextField(
-                controller: descController,
-                decoration: const InputDecoration(labelText: "รายละเอียด"),
+                controller: phoneController,
+                decoration: const InputDecoration(labelText: "เบอร์โทรศัพท์"),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+
+              TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(labelText: "username"),
+              ),
+
+              const SizedBox(height: 10),
+
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(labelText: "password"),
+              ),
+
+              const SizedBox(height: 10),
 
               SizedBox(
                 width: double.infinity,

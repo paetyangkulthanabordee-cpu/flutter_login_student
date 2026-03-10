@@ -46,7 +46,7 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
-  List products = [];
+  List employees = [];
   List filteredProducts = [];
 
   final TextEditingController searchController = TextEditingController();
@@ -68,8 +68,8 @@ class _ProductListState extends State<ProductList> {
 
       if (response.statusCode == 200) {
         setState(() {
-          products = json.decode(response.body);
-          filteredProducts = products;
+          employees = json.decode(response.body);
+          filteredProducts = employees;
         });
       }
     } catch (e) {
@@ -83,8 +83,8 @@ class _ProductListState extends State<ProductList> {
 
   void filterProducts(String query) {
     setState(() {
-      filteredProducts = products.where((product) {
-        final name = product['name']?.toLowerCase() ?? '';
+      filteredProducts = employees.where((product) {
+        final name = product['fname']?.toLowerCase() ?? '';
         return name.contains(query.toLowerCase());
       }).toList();
     });
@@ -106,7 +106,7 @@ class _ProductListState extends State<ProductList> {
         fetchProducts();
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("ลบสินค้าเรียบร้อย")),
+          const SnackBar(content: Text("ลบนักศึกษาเรียบร้อย")),
         );
       }
     } catch (e) {
@@ -161,7 +161,7 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Product List'),
+      appBar: AppBar(title: const Text('Students List'),
 
       actions: [
           Text("Welcome . ${widget.name}"),
@@ -194,7 +194,7 @@ class _ProductListState extends State<ProductList> {
             child: TextField(
               controller: searchController,
               decoration: const InputDecoration(
-                labelText: 'Search product',
+                labelText: 'Search Students',
                 prefixIcon: Icon(Icons.search),
               ),
               onChanged: filterProducts,
@@ -239,14 +239,16 @@ class _ProductListState extends State<ProductList> {
                           // 🏷 NAME
                           //////////////////////////////////////////////////
 
-                          title: Text(product['name'] ?? 'No Name'),
+                          title: Text(
+                             '${product['fname']} ${product['lname']} ',
+                            ),
 
                           //////////////////////////////////////////////////
                           // 📝 DESC
                           //////////////////////////////////////////////////
 
                           subtitle:
-                              Text(product['description'] ?? ''),
+                              Text(product['phone'] ?? ''),
 
                           //////////////////////////////////////////////////
                           // 💰 PRICE
@@ -357,7 +359,7 @@ class ProductDetail extends StatelessWidget {
             //////////////////////////////////////////////////////
 
             Text(
-              product['name'] ?? '',
+              '${product['fname']} ${product['lname']} ', 
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -365,12 +367,12 @@ class ProductDetail extends StatelessWidget {
             ),
 
             const SizedBox(height: 10),
-
+            
             //////////////////////////////////////////////////////
             // 📝 DESC
             //////////////////////////////////////////////////////
 
-            Text(product['description'] ?? ''),
+            Text(product['phone'] ?? ''),
 
             const SizedBox(height: 10),
 
@@ -379,7 +381,7 @@ class ProductDetail extends StatelessWidget {
             //////////////////////////////////////////////////////
 
             Text(
-              'ราคา: ฿${product['price']}',
+              '${product['username']}',
               style: const TextStyle(fontSize: 18),
             ),
           ],

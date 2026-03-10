@@ -3,7 +3,7 @@ include "condb.php";
 
 try {
 
-    $stmt = $conn->query("SELECT * FROM products");
+    $stmt = $conn->query("SELECT * FROM employees");
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($users);
     

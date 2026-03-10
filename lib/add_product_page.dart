@@ -18,9 +18,13 @@ class _AddProductPageState extends State<AddProductPage> {
   // ✅ Controllers
   ////////////////////////////////////////////////////////////
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
-  final TextEditingController descController = TextEditingController();
+  final TextEditingController fnameController = TextEditingController();
+  final TextEditingController lnameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+
 
   ////////////////////////////////////////////////////////////
   // ✅ Image (ใช้ XFile รองรับ Web)
@@ -65,9 +69,11 @@ class _AddProductPageState extends State<AddProductPage> {
     // ✅ Fields
     ////////////////////////////////////////////////////////////
 
-    request.fields['name'] = nameController.text;
-    request.fields['price'] = priceController.text;
-    request.fields['description'] = descController.text;
+    request.fields['fname'] = fnameController.text;
+    request.fields['lname'] = lnameController.text;
+    request.fields['phone'] = phoneController.text;
+    request.fields['username'] = usernameController.text;
+    request.fields['password'] = passwordController.text;
 
     ////////////////////////////////////////////////////////////
     // ✅ Upload Image (แยก Web / Mobile)
@@ -107,7 +113,7 @@ class _AddProductPageState extends State<AddProductPage> {
     if (data["success"] == true) {
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("เพิ่มสินค้าเรียบร้อย")),
+        const SnackBar(content: Text("เพิ่มนักศึกษาเรียบร้อย")),
       );
 
       Navigator.pop(context, true);
@@ -127,7 +133,7 @@ class _AddProductPageState extends State<AddProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("เพิ่มสินค้า")),
+      appBar: AppBar(title: const Text("เพิ่มนักศึกษา")),
 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -171,9 +177,19 @@ class _AddProductPageState extends State<AddProductPage> {
               ////////////////////////////////////////////////////////////
 
               TextField(
-                controller: nameController,
+                controller: fnameController,
                 decoration: const InputDecoration(
-                  labelText: "ชื่อสินค้า",
+                  labelText: "ชื่อ",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
+              TextField(
+                controller: lnameController,
+                decoration: const InputDecoration(
+                  labelText: "นามสกุล",
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -185,30 +201,41 @@ class _AddProductPageState extends State<AddProductPage> {
               ////////////////////////////////////////////////////////////
 
               TextField(
-                controller: priceController,
+                controller: phoneController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                  labelText: "ราคา",
+                  labelText: "เบอร์โทรศัพท์",
                   border: OutlineInputBorder(),
                 ),
               ),
 
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
 
               ////////////////////////////////////////////////////////////
               // 📝 Description
               ////////////////////////////////////////////////////////////
 
               TextField(
-                controller: descController,
+                controller: usernameController,
                 maxLines: 3,
                 decoration: const InputDecoration(
-                  labelText: "รายละเอียด",
+                  labelText: "username",
                   border: OutlineInputBorder(),
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+
+              TextField(
+                controller: passwordController,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: "password",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 10),
 
               ////////////////////////////////////////////////////////////
               // ✅ Button
@@ -218,7 +245,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: saveProduct,
-                  child: const Text("บันทึกสินค้า"),
+                  child: const Text("บันทึกนักศึกษา"),
                 ),
               ),
             ],

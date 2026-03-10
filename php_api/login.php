@@ -4,7 +4,7 @@ include "condb.php";
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
-$sql = "SELECT * FROM users WHERE username=:username AND password=:password";
+$sql = "SELECT * FROM employees WHERE username=:username AND password=:password";
 
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':username',$username);
@@ -18,7 +18,7 @@ if($user){
  echo json_encode([
   "status"=>"success",
   "username"=>$user["username"],
-  "name"=>$user["name"] ?? ""
+  "name"=>$user["fname"] . " " . $user["lname"]
  ]);
 
 }else{

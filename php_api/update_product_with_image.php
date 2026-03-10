@@ -15,9 +15,11 @@ header('Content-Type: application/json');
 try {
 
     $id = $_POST['id'];
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $price = $_POST['phone'];
+    $user = $_POST['username'];
+    $password = $_POST['password'];
     $oldImage = $_POST['old_image'];
 
     $imageName = $oldImage;
@@ -25,7 +27,7 @@ try {
     if (isset($_FILES['image'])) {
 
         $targetDir = "images/";
-        $imageName = time() . "_" . basename($_FILES["image"]["name"]);
+        $imageName = time() . "_" . basename($_FILES["image"]["fname"]);
         $targetFile = $targetDir . $imageName;
 
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
@@ -43,19 +45,23 @@ try {
         }
     }
 
-    $sql = "UPDATE products 
-            SET name = :name,
-                price = :price,
-                description = :description,
+    $sql = "UPDATE employees 
+            SET fname = :fname,
+                lname = :lname,
+                phone = :phone,
+                username = :username,
+                password = :password,
                 image = :image
             WHERE id = :id";
 
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(':id', $id);
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':price', $price);
-    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':fname', $fname);
+    $stmt->bindParam(':lname', $lname);
+    $stmt->bindParam(':phone', $phone);
+    $stmt->bindParam(':username', $user);
+    $stmt->bindParam(':password', $password);
     $stmt->bindParam(':image', $imageName);
 
     $stmt->execute();

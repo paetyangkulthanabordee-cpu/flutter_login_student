@@ -3,9 +3,11 @@ include 'condb.php';
 
 header('Content-Type: application/json');
 
-$name = $_POST['name'];
-$price = $_POST['price'];
-$description = $_POST['description'];
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
+$phone = $_POST['phone'];
+$username = $_POST['username'];
+$password = $_POST['password'];
 
 ////////////////////////////////////////////////////////////
 // ✅ รับรูปภาพ
@@ -16,7 +18,7 @@ $imageName = "";
 if (isset($_FILES['image'])) {
 
     $targetDir = "images/";   // ✅ โฟลเดอร์เก็บรูป
-    $imageName = time() . "_" . basename($_FILES["image"]["name"]);
+    $imageName = time() . "_" . basename($_FILES["image"]["fname"]);
     $targetFile = $targetDir . $imageName;
 
     if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
@@ -35,13 +37,15 @@ if (isset($_FILES['image'])) {
 try {
 
     $stmt = $conn->prepare("
-        INSERT INTO products (name, price, description, image)
-        VALUES (:name, :price, :description, :image)
+        INSERT INTO employees (fname, lname, phone, username, password, image)
+        VALUES (:fname, :lname, :phone, :username, :password, :image)
     ");
 
-    $stmt->bindParam(":name", $name);
-    $stmt->bindParam(":price", $price);
-    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":fname", $fname);
+    $stmt->bindParam(":lname", $lname);
+    $stmt->bindParam(":phone", $phone);
+    $stmt->bindParam(":username", $username);
+    $stmt->bindParam(":password", $password);
     $stmt->bindParam(":image", $imageName);
 
     if ($stmt->execute()) {
